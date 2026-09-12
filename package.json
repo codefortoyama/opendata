@@ -1,0 +1,17 @@
+{
+  "name": "codetoyama-open-data",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Code for Toyama - Open Data Link Collection Site",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "astro": "^4.0.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10"
+  }
+}

@@ -1,0 +1,168 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Code for Toyama - Open Data">
+  <div class="container">
+    <header class="site-header">
+      <div class="inner">
+        <div class="logo">
+          <span class="logo-mark">📊</span>
+          <h1>Code for Toyama</h1>
+        </div>
+        <p class="subtitle">オープンデータ活用サイト・アプリ リンク集</p>
+      </div>
+    </header>
+
+    <nav class="section-nav">
+      <a href="#prefectural" class="nav-link">県・市町村 公式データ</a>
+      <a href="#codetoyama" class="nav-link">Code for Toyama 制作</a>
+      <a href="#about" class="nav-link">このサイトについて</a>
+    </nav>
+
+    <main>
+      <section id="prefectural" class="section">
+        <h2 class="section-title">
+          <span class="badge">1</span>
+          富山県内のオープンデータサイト
+        </h2>
+        <p class="section-desc">富山県や市町村が公開しているオープンデータポータルサイト</p>
+        <div class="link-grid">
+          <a href="https://ckan-front.tdcp.pref.toyama.jp/" class="card" target="_blank" rel="noopener">
+            <h3>富山県／富山データ連携基盤</h3>
+            <p>令和6年度より運用開始された県内のオープンデータ一元提供プラットフォーム</p>
+            <span class="arrow">→</span>
+          </a>
+          <a href="https://opdt.city.toyama.lg.jp/" class="card" target="_blank" rel="noopener">
+            <h3>富山市オープンデータサイト</h3>
+            <p>富山市が運営するデータカタログサイト</p>
+            <span class="arrow">→</span>
+          </a>
+          <a href="https://www.city.takaoka.toyama.jp/soshiki/johoseisakuka/2/3/1/1/index.html" class="card" target="_blank" rel="noopener">
+            <h3>高岡市 オープンデータ</h3>
+            <p>高岡市の公共施設・人口・防災等のデータカタログ</p>
+            <span class="arrow">→</span>
+          </a>
+          <a href="https://www.city.uozu.toyama.jp/guide/svGuideDtl.aspx?servno=13031" class="card" target="_blank" rel="noopener">
+            <h3>魚津市 オープンデータ</h3>
+            <p>魚津市が保有する統計資料や施設情報などのデータ</p>
+            <span class="arrow">→</span>
+          </a>
+          <a href="https://www.city.himi.toyama.jp/gyosei/soshiki/somu/5/10101.html" class="card" target="_blank" rel="noopener">
+            <h3>氷見市 統計・データ</h3>
+            <p>氷見市の各種統計データおよび公開情報</p>
+            <span class="arrow">→</span>
+          </a>
+          <a href="https://www.city.namerikawa.toyama.jp/soshiki/dx/opendata/index.html" class="card" target="_blank" rel="noopener">
+            <h3>滑川市 オープンデータ</h3>
+            <p>滑川市の行政データ・統計情報のカタログ</p>
+            <span class="arrow">→</span>
+          </a>
+          <a href="https://www.city.kurobe.toyama.jp/category/page.aspx?servno=10951" class="card" target="_blank" rel="noopener">
+            <h3>黒部市 オープンデータ</h3>
+            <p>黒部市が公開する二次利用可能な公的データ</p>
+            <span class="arrow">→</span>
+          </a>
+          <a href="https://www.city.tonami.lg.jp/info/4061p/#gsc.tab=0" class="card" target="_blank" rel="noopener">
+            <h3>砺波市 オープンデータ</h3>
+            <p>砺波市が提供する公共施設情報などのデータ集</p>
+            <span class="arrow">→</span>
+          </a>
+          <a href="https://www.city.oyabe.toyama.jp/shiseijyouhou/1001969/1003260.html" class="card" target="_blank" rel="noopener">
+            <h3>小矢部市 オープンデータ</h3>
+            <p>小矢部市の統計・施設・防災などの公開データ</p>
+            <span class="arrow">→</span>
+          </a>
+          <a href="https://www.city.nanto.toyama.jp/1909.html" class="card" target="_blank" rel="noopener">
+            <h3>南砺市 オープンデータ</h3>
+            <p>南砺市が提供する各種統計・行政データ</p>
+            <span class="arrow">→</span>
+          </a>
+          <a href="https://opendata.city.imizu.toyama.jp/" class="card" target="_blank" rel="noopener">
+            <h3>射水市 オープンデータ</h3>
+            <p>射水市の避難所、人口統計等のデータ提供</p>
+            <span class="arrow">→</span>
+          </a>
+          <a href="https://ckan-front.tdcp.pref.toyama.jp/organization" class="card" target="_blank" rel="noopener">
+            <h3>その他 町・村データ</h3>
+            <p>上市町・立山町・入善町・朝日町・舟橋村のデータ（連携基盤内）</p>
+            <span class="arrow">→</span>
+          </a>
+        </div>
+      </section>
+
+      <section id="codetoyama" class="section">
+        <h2 class="section-title">
+          <span class="badge">2</span>
+          オープンデータを活用したサイト・アプリ
+        </h2>
+        <div class="link-grid">
+          <a href="https://toyama-weather.codefotoyama.org" class="card" target="_blank" rel="noopener">
+            <h3>Toyama Weather</h3>
+            <p>天気予報・気象データを活用したサイト</p>
+            <span class="arrow">→</span>
+          </a>
+          <a href="https://toyama-transit.codefotoyama.org" class="card" target="_blank" rel="noopener">
+            <h3>Toyama Transit</h3>
+            <p>バス・路面電車の運行情報サイト</p>
+            <span class="arrow">→</span>
+          </a>
+          <a href="https://toyama-tourism.codefotoyama.org" class="card" target="_blank" rel="noopener">
+            <h3>Toyama Tourism</h3>
+            <p>観光スポット・イベント情報サイト</p>
+            <span class="arrow">→</span>
+          </a>
+          <a href="https://toyama-covid.codefotoyama.org" class="card" target="_blank" rel="noopener">
+            <h3>Toyama COVID-19</h3>
+            <p>新型コロナウイルス感染状況ダッシュボード</p>
+            <span class="arrow">→</span>
+          </a>
+          <a href="https://toyama-flood.codefotoyama.org" class="card" target="_blank" rel="noopener">
+            <h3>Toyama Flood Map</h3>
+            <p>浸水想定区域・水害リスクマップ</p>
+            <span class="arrow">→</span>
+          </a>
+          <a href="https://toyama-crop.codefotoyama.org" class="card" target="_blank" rel="noopener">
+            <h3>Toyama Crop Tracker</h3>
+            <p>農業気象データ・作物生育状況</p>
+            <span class="arrow">→</span>
+          </a>
+          <a href="https://codefortoyama.github.io/toyama-food-watcher" class="card" target="_blank" rel="noopener">
+            <h3>Toyama Food Watcher</h3>
+            <p>食品関連のオープンデータ活用サイト</p>
+            <span class="arrow">→</span>
+          </a>
+        </div>
+      </section>
+
+      <section id="about" class="section">
+        <h2 class="section-title">
+          <span class="badge">3</span>
+          このサイトについて
+        </h2>
+        <div class="about-content">
+          <p>
+            このサイトは Code for Toyama が運営する、富山県内のオープンデータ活用サイトのリンク集です。
+          </p>
+          <p>
+            公式データポータルと、当団体が制作したアプリ・サイトを一覧で紹介しています。
+            オープデータをさらに身近に、誰でも簡単に情報を取得できるよう、活動を続けています。
+          </p>
+          <div class="social-links">
+            <a href="https://github.com/codefotoyama" class="btn" target="_blank" rel="noopener">
+              GitHub Organization
+            </a>
+            <a href="https://www.codefotoyama.org" class="btn btn-primary" target="_blank" rel="noopener">
+              公式サイト
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>&copy; 2026 Code for Toyama. All rights reserved.</p>
+      <p class="footer-note">This site is built with Astro and deployed on GitHub Pages.</p>
+    </footer>
+  </div>
+</Base>
