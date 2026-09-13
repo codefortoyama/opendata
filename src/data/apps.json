@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "name": "Toyama Food Watcher",
+    "name": "富山市食品営業許可申請ビューア",
     "category": ["食品", "衛生", "検査"],
     "description": "食品関連のオープンデータ活用サイト",
     "url": "https://codefortoyama.github.io/toyama-food-watcher/",
