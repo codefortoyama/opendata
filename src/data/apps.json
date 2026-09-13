@@ -34,5 +34,14 @@
     "url": "https://www.info-toyama.com/stories/toyama_tourismdata",
     "copyright": "とやま観光推進機構",
     "verifiedDate": "2026-09-13"
+  },
+  {
+    "id": 5,
+    "name": "とやまロケーションシステム",
+    "category": ["交通", "バス", "市内電車", "運行情報"],
+    "description": "富山県内のバス・市内電車・電車の運行情報を配信しています。",
+    "url": "https://toyama.vtfm.jp/",
+    "copyright": "Toyama Vehicle Location System",
+    "verifiedDate": "2026-09-13"
   }
 ]
