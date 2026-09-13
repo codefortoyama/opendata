@@ -7,5 +7,14 @@
     "url": "https://codefortoyama.github.io/toyama-food-watcher/",
     "copyright": "Code for Toyama",
     "verifiedDate": "2026-09-13"
+  },
+  {
+    "id": 2,
+    "name": "きてきて。Toyama",
+    "category": ["交通", "公共交通", "観光"],
+    "description": "公共交通のオープンデータを活用したサイト",
+    "url": "https://codefortoyama.github.io/kitekite/",
+    "copyright": "Code for Toyama",
+    "verifiedDate": "2026-09-13"
   }
 ]
