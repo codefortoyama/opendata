@@ -1,0 +1,11 @@
+[
+  {
+    "id": 1,
+    "name": "Toyama Food Watcher",
+    "category": ["食品", "衛生", "検査"],
+    "description": "食品関連のオープンデータ活用サイト",
+    "url": "https://codefortoyama.github.io/toyama-food-watcher/",
+    "copyright": "Code for Toyama",
+    "verifiedDate": "2026-09-13"
+  }
+]
