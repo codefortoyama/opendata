@@ -5,7 +5,7 @@
     "category": ["食品", "衛生", "検査"],
     "description": "食品関連のオープンデータ活用サイト",
     "url": "https://codefortoyama.github.io/toyama-food-watcher/",
-    "copyright": "Code for Toyama",
+    "copyright": "株式会社EvoLiNQ",
     "verifiedDate": "2026-09-13"
   },
   {
@@ -23,7 +23,7 @@
     "category": ["交通", "GTFS", "公共交通", "ツール"],
     "description": "公共交通運行情報標準データの中身を確認したり、編集することが可能なツールです",
     "url": "https://gtfs.evolinq.link/",
-    "copyright": "Code for Toyama",
+    "copyright": "株式会社EvoLiNQ",
     "verifiedDate": "2026-09-13"
   }
 ]
