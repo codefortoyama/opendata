@@ -39,11 +39,16 @@ function renderApps(): void {
 
   grid.innerHTML = pageApps.map((app) => `
     <a href="${app.url}" class="card" target="_blank" rel="noopener">
-      <h3>${escapeHtml(app.name)}</h3>
-      <div class="tags">
-        ${app.category.map((tag) => `<span class="tag">${escapeHtml(tag)}</span>`).join('')}
+      <div class="card-content">
+        <h3>${escapeHtml(app.name)}</h3>
+        <div class="tags">
+          ${app.category.map((tag) => `<span class="tag">${escapeHtml(tag)}</span>`).join('')}
+        </div>
+        <p>${escapeHtml(app.description)}</p>
       </div>
-      <p>${escapeHtml(app.description)}</p>
+      <div class="card-qr">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=${encodeURIComponent(app.url)}" alt="QR Code" width="100" height="100" loading="lazy" />
+      </div>
       <div class="card-meta">
         <span class="copyright">© ${escapeHtml(app.copyright)}</span>
         <span class="verified-date">確認日: ${escapeHtml(app.verifiedDate)}</span>

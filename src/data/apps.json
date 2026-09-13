@@ -25,5 +25,14 @@
     "url": "https://gtfs.evolinq.link/",
     "copyright": "株式会社EvoLiNQ",
     "verifiedDate": "2026-09-13"
+  },
+  {
+    "id": 4,
+    "name": "ツーリズム統計基盤「TOYTOS」（トイトス）",
+    "category": ["観光", "統計", "データカタログ"],
+    "description": "富山で休もう。ツーリズム統計基盤「TOYTOS」（トイトス）は、蓄積する観光関連データを可視化、オープンデータとして提供するものです。 観光関連事業者の皆さまのマーケティング活動や商品開発、観光プロモーション等にご活用ください。",
+    "url": "https://www.info-toyama.com/stories/toyama_tourismdata",
+    "copyright": "とやま観光推進機構",
+    "verifiedDate": "2026-09-13"
   }
 ]

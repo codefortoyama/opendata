@@ -192,7 +192,28 @@ const apps = appsData as OpenDataApp[];
     color: #166534;
     border-radius: 4px;
   }
+  :global(.card) {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  :global(.card-content) {
+    flex: 1;
+    min-width: 200px;
+  }
+  :global(.card-qr) {
+    flex-shrink: 0;
+    padding: 0.5rem;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 4px;
+  }
+  :global(.card-qr img) {
+    display: block;
+  }
   :global(.card-meta) {
+    width: 100%;
     display: flex;
     justify-content: space-between;
     font-size: 0.75rem;
