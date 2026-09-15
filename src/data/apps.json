@@ -43,5 +43,14 @@
     "url": "https://toyama.vtfm.jp/",
     "copyright": "Toyama Vehicle Location System",
     "verifiedDate": "2026-09-13"
+  },
+  {
+    "id": 6,
+    "name": "全国自治体データランキング",
+    "category": ["データ"],
+    "description": "オープンデータ活用サイト",
+    "url": "https://japan-data-site.vercel.app/",
+    "copyright": "全国自治体データランキング",
+    "verifiedDate": "2026-09-15"
   }
 ]
