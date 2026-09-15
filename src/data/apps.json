@@ -1,12 +1,12 @@
 [
   {
     "id": 1,
-    "name": "富山市食品営業許可申請ビューア",
-    "category": ["食品", "衛生", "検査"],
-    "description": "食品関連のオープンデータ活用サイト",
-    "url": "https://codefortoyama.github.io/toyama-food-watcher/",
-    "copyright": "株式会社EvoLiNQ",
-    "verifiedDate": "2026-09-13"
+    "name": "全国自治体データランキング",
+    "category": ["データ"],
+    "description": "オープンデータ活用サイト",
+    "url": "https://japan-data-site.vercel.app/",
+    "copyright": "全国自治体データランキング",
+    "verifiedDate": "2026-09-15"
   },
   {
     "id": 2,
@@ -46,11 +46,11 @@
   },
   {
     "id": 6,
-    "name": "全国自治体データランキング",
-    "category": ["データ"],
-    "description": "オープンデータ活用サイト",
-    "url": "https://japan-data-site.vercel.app/",
-    "copyright": "全国自治体データランキング",
-    "verifiedDate": "2026-09-15"
+    "name": "富山市食品営業許可申請ビューア",
+    "category": ["食品", "衛生", "検査"],
+    "description": "食品関連のオープンデータ活用サイト",
+    "url": "https://codefortoyama.github.io/toyama-food-watcher/",
+    "copyright": "株式会社EvoLiNQ",
+    "verifiedDate": "2026-09-13"
   }
 ]
