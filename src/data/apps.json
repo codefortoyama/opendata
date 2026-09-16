@@ -8,24 +8,23 @@
     "copyright": "全国自治体データランキング",
     "verifiedDate": "2026-09-15"
   },
-  
   {
-    "id": 2,
-    "name": "富山きてきて空港",
-    "category": ["交通", "公共交通", "観光"],
-    "description": "公共交通のオープンデータを活用したサイト",
-    "url": "https://codefortoyama.github.io/kitekite/",
-    "copyright": "Code for Toyama",
-    "verifiedDate": "2026-09-13"
+    "id": 7,
+    "name": "Yahoo!乗換案内",
+    "category": ["交通", "GTFS", "公共交通", "ツール"],
+    "description": "乗換案内・運行情報サイト",
+    "url": "https://transit.yahoo.co.jp/",
+    "copyright": "Yahoo! Japan",
+    "verifiedDate": "2026-09-16"
   },
   {
-    "id": 3,
-    "name": "GTFS WEB エディタ",
+    "id": 8,
+    "name": "Google マップ",
     "category": ["交通", "GTFS", "公共交通", "ツール"],
-    "description": "公共交通運行情報標準データの中身を確認したり、編集することが可能なツールです",
-    "url": "https://gtfs.evolinq.link/",
-    "copyright": "株式会社EvoLiNQ",
-    "verifiedDate": "2026-09-13"
+    "description": "公共交通情報の検索やルート案内ができるマップサービス",
+    "url": "https://www.google.com/maps",
+    "copyright": "Google",
+    "verifiedDate": "2026-09-17"
   },
   {
     "id": 4,
@@ -55,21 +54,21 @@
     "verifiedDate": "2026-09-13"
   },
   {
-    "id": 7,
-    "name": "Yahoo!乗換案内",
-    "category": ["交通", "GTFS", "公共交通", "ツール"],
-    "description": "乗換案内・運行情報サイト",
-    "url": "https://transit.yahoo.co.jp/",
-    "copyright": "Yahoo! Japan",
-    "verifiedDate": "2026-09-16"
+    "id": 2,
+    "name": "富山きてきて空港",
+    "category": ["交通", "公共交通", "観光"],
+    "description": "公共交通のオープンデータを活用したサイト",
+    "url": "https://codefortoyama.github.io/kitekite/",
+    "copyright": "Code for Toyama",
+    "verifiedDate": "2026-09-13"
   },
   {
-    "id": 8,
-    "name": "Google マップ",
+    "id": 3,
+    "name": "GTFS WEB エディタ",
     "category": ["交通", "GTFS", "公共交通", "ツール"],
-    "description": "公共交通情報の検索やルート案内ができるマップサービス",
-    "url": "https://www.google.com/maps",
-    "copyright": "Google",
-    "verifiedDate": "2026-09-17"
+    "description": "公共交通運行情報標準データの中身を確認したり、編集することが可能なツールです",
+    "url": "https://gtfs.evolinq.link/",
+    "copyright": "株式会社EvoLiNQ",
+    "verifiedDate": "2026-09-13"
   }
 ]
