@@ -2,12 +2,13 @@
   {
     "id": 1,
     "name": "全国自治体データランキング",
-    "category": ["データ"],
+    "category": ["データ", "ランキング"],
     "description": "オープンデータ活用サイト",
     "url": "https://japan-data-site.vercel.app/",
     "copyright": "全国自治体データランキング",
     "verifiedDate": "2026-09-15"
   },
+  
   {
     "id": 2,
     "name": "富山きてきて空港",
@@ -52,5 +53,23 @@
     "url": "https://codefortoyama.github.io/toyama-food-watcher/",
     "copyright": "株式会社EvoLiNQ",
     "verifiedDate": "2026-09-13"
+  },
+  {
+    "id": 7,
+    "name": "Yahoo!乗換案内",
+    "category": ["交通", "GTFS", "公共交通", "ツール"],
+    "description": "乗換案内・運行情報サイト",
+    "url": "https://transit.yahoo.co.jp/",
+    "copyright": "Yahoo! Japan",
+    "verifiedDate": "2026-09-16"
+  },
+  {
+    "id": 8,
+    "name": "Google マップ",
+    "category": ["交通", "GTFS", "公共交通", "ツール"],
+    "description": "公共交通情報の検索やルート案内ができるマップサービス",
+    "url": "https://www.google.com/maps",
+    "copyright": "Google",
+    "verifiedDate": "2026-09-17"
   }
 ]
