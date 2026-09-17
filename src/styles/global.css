@@ -136,13 +136,37 @@ body {
 
 .card {
   background: white;
-  border-radius: var(--border-radius);
+  border-radius: 16px;
   padding: 1.5rem;
   text-decoration: none;
   color: var(--color-text);
   box-shadow: var(--box-shadow);
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
   display: block;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,0.05);
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-primary-light), var(--color-primary));
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.12);
+}
+
+.card:hover::before {
+  opacity: 1;
 }
 
 .card:hover {
@@ -190,14 +214,58 @@ body {
 }
 
 .btn {
-  display: inline-block;
-  padding: 0.6rem 1.2rem;
-  border-radius: var(--border-radius);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.5rem;
+  border-radius: 50px;
   text-decoration: none;
-  font-size: 0.85rem;
-  font-weight: 500;
-  transition: opacity 0.2s;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
   background: var(--color-bg);
+  border: 2px solid transparent;
+  position: relative;
+  overflow: hidden;
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0,0,0,0.05), transparent);
+  transition: left 0.5s;
+}
+
+.btn:hover::before {
+  left: 100%;
+}
+
+.btn:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(26, 122, 46, 0.2);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
+  color: white;
+  border-color: transparent;
+  box-shadow: 0 4px 12px rgba(26, 122, 46, 0.3);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--color-primary-light), var(--color-primary));
+  color: white;
+  border-color: transparent;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(26, 122, 46, 0.4);
 }
 
 /* Footer */
