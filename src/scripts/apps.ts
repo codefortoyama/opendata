@@ -106,6 +106,29 @@ function renderPagination(): void {
   pagination.innerHTML = html;
 }
 
+function getPageFromUrl(): number {
+  try {
+    const p = parseInt(new URLSearchParams(window.location.search).get('page') ?? '1', 10);
+    return Number.isFinite(p) && p >= 1 ? p : 1;
+  } catch {
+    return 1;
+  }
+}
+
+function syncPageToUrl(page: number, totalPages: number): void {
+  try {
+    const url = new URL(window.location.href);
+    if (page <= 1) {
+      url.searchParams.delete('page');
+    } else {
+      url.searchParams.set('page', String(Math.min(page, Math.max(totalPages, 1))));
+    }
+    window.history.pushState({}, '', url);
+  } catch {
+    // URL同期に失敗してもページネーション自体は継続
+  }
+}
+
 function updateResultsCount(): void {
   const { resultsCount } = getElements();
   if (!resultsCount) return;
@@ -131,6 +154,15 @@ function filterApps(query: string): void {
     );
   }
   currentPage = 1;
+  try {
+    const url = new URL(window.location.href);
+    if (url.searchParams.has('page')) {
+      url.searchParams.delete('page');
+      window.history.replaceState({}, '', url);
+    }
+  } catch {
+    // ignore
+  }
   renderApps();
   renderPagination();
   updateResultsCount();
@@ -139,6 +171,10 @@ function filterApps(query: string): void {
 function init(apps: OpenDataApp[]): void {
   allApps = apps;
   filteredApps = [...apps];
+  currentPage = Math.min(
+    getPageFromUrl(),
+    Math.max(1, Math.ceil(filteredApps.length / ITEMS_PER_PAGE))
+  );
 
   const { searchInput, pagination, grid } = getElements();
 
@@ -152,15 +188,28 @@ function init(apps: OpenDataApp[]): void {
   if (pagination) {
     pagination.addEventListener('click', (e: Event) => {
       const target = e.target as HTMLElement;
-      const btn = target.closest('.page-btn') as HTMLButtonElement | null;
-      if (btn && !btn.classList.contains('active')) {
-        currentPage = parseInt(btn.dataset.page ?? '1', 10);
-        renderApps();
-        renderPagination();
-        grid?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+      const link = target.closest('.page-btn') as HTMLAnchorElement | null;
+      if (!link) return;
+      // <a href="?page=N"> のデフォルト遷移(リロード)を止めてSPA的に切替
+      e.preventDefault();
+      if (link.classList.contains('active')) return;
+      const next = parseInt(link.dataset.page ?? '1', 10);
+      if (!Number.isFinite(next)) return;
+      currentPage = next;
+      const totalPages = Math.ceil(filteredApps.length / ITEMS_PER_PAGE);
+      syncPageToUrl(currentPage, totalPages);
+      renderApps();
+      renderPagination();
+      grid?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   }
+
+  window.addEventListener('popstate', () => {
+    const totalPages = Math.ceil(filteredApps.length / ITEMS_PER_PAGE);
+    currentPage = Math.min(getPageFromUrl(), Math.max(1, totalPages));
+    renderApps();
+    renderPagination();
+  });
 
   renderApps();
   renderPagination();
