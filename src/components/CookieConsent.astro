@@ -1,0 +1,135 @@
+---
+---
+
+<div id="cookie-consent" class="cookie-consent" role="alertdialog" aria-labelledby="cookie-heading" aria-modal="true">
+  <p id="cookie-heading">
+    このウェブサイトはクッキーを使用しています。
+    <a href="/cookie-policy">クッキーポリシー</a>をご確認ください。
+  </p>
+  <button id="cookie-accept">同意する</button>
+  <button id="cookie-reject">拒否</button>
+</div>
+
+<style>
+  .cookie-consent {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #fff;
+    border-top: 1px solid #ccc;
+    padding: 1rem;
+    text-align: center;
+    z-index: 1000;
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+    display: none;
+  }
+  .cookie-consent.show {
+    display: block;
+  }
+  .cookie-consent p {
+    margin-bottom: 0.75rem;
+    font-size: 0.9rem;
+  }
+  .cookie-consent a {
+    color: var(--color-primary, #1a7a2e);
+    text-decoration: underline;
+  }
+  .cookie-consent button {
+    margin: 0 .5rem;
+    padding: .5rem 1rem;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 0.85rem;
+  }
+  #cookie-accept {
+    background: #4caf50;
+    color: #fff;
+  }
+  #cookie-reject {
+    background: #f44336;
+    color: #fff;
+  }
+</style>
+
+<script>
+  (function() {
+    function getStorageItem(key) {
+      try {
+        return localStorage.getItem(key);
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function setStorageItem(key, value) {
+      try {
+        localStorage.setItem(key, value);
+      } catch (e) {
+        // localStorage利用不可の場合、サイレントに失敗
+      }
+    }
+
+    function removeStorageItem(key) {
+      try {
+        localStorage.removeItem(key);
+      } catch (e) {
+        // localStorage利用不可の場合、サイレントに失敗
+      }
+    }
+
+    var banner = document.getElementById('cookie-consent');
+    var acceptBtn = document.getElementById('cookie-accept');
+    var rejectBtn = document.getElementById('cookie-reject');
+
+    if (!banner || !acceptBtn || !rejectBtn) return;
+
+    var consent = getStorageItem('cookieConsent');
+
+    function updateConsent(granted) {
+      if (typeof gtag === 'function') {
+        if (granted) {
+          gtag('consent', 'update', { 'ad_storage': 'granted', 'analytics_storage': 'granted' });
+        } else {
+          gtag('consent', 'update', { 'ad_storage': 'denied', 'analytics_storage': 'denied' });
+        }
+      }
+    }
+
+    function showBanner() {
+      banner.classList.add('show');
+      acceptBtn.focus();
+    }
+
+    function hideBanner() {
+      banner.classList.remove('show');
+    }
+
+    if (consent !== 'accepted' && consent !== 'rejected') {
+      showBanner();
+    }
+
+    acceptBtn.addEventListener('click', function() {
+      setStorageItem('cookieConsent', 'accepted');
+      hideBanner();
+      updateConsent(true);
+    });
+
+    rejectBtn.addEventListener('click', function() {
+      setStorageItem('cookieConsent', 'rejected');
+      hideBanner();
+      updateConsent(false);
+    });
+
+    var settingsLinks = document.querySelectorAll('[data-cookie-settings]');
+    settingsLinks.forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        removeStorageItem('cookieConsent');
+        updateConsent(false);
+        showBanner();
+      });
+    });
+  })();
+</script>
