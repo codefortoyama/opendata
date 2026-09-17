@@ -8,7 +8,7 @@ const apps = appsData as OpenDataApp[];
 
 <Base title="Code for Toyama - Open Data">
   <div class="container">
-    <header class="site-header">
+    <header class="site-header hero">
       <div class="inner">
         <div class="logo">
           <span class="logo-mark">📊</span>
@@ -19,6 +19,7 @@ const apps = appsData as OpenDataApp[];
     </header>
 
     <nav class="section-nav">
+      <button class="menu-toggle" aria-label="メニュー" aria-expanded="false">☰</button>
       <a href="#prefectural" class="nav-link">県・市町村 公式データ</a>
       <a href="#codetoyama" class="nav-link">活用サイト・アプリ</a>
       <a href="#about" class="nav-link">このサイトについて</a>
@@ -26,7 +27,7 @@ const apps = appsData as OpenDataApp[];
 
     <main>
       <!-- セクション1: 今まで通りの公式データ（静的表示） -->
-      <section id="prefectural" class="section">
+      <section id="prefectural" class="section fade-in fade-in-delay-1">
         <h2 class="section-title">
           <span class="badge">1</span>
           富山県内のオープンデータサイト
@@ -97,7 +98,7 @@ const apps = appsData as OpenDataApp[];
       </section>
 
       <!-- セクション2: データから生成する活用サイト・アプリ（動的表示） -->
-      <section id="codetoyama" class="section">
+      <section id="codetoyama" class="section fade-in fade-in-delay-2">
         <h2 class="section-title">
           <span class="badge">2</span>
           オープンデータを活用したサイト・アプリ
@@ -124,7 +125,7 @@ const apps = appsData as OpenDataApp[];
           <!-- JSでレンダリング -->
         </nav>
 </section>
-       <section id="about" class="section">
+       <section id="about" class="section fade-in fade-in-delay-3">
         <h2 class="section-title">
           <span class="badge">3</span>
           このサイトについて
@@ -146,7 +147,14 @@ const apps = appsData as OpenDataApp[];
     </main>
 
     <footer class="site-footer">
-      <p>&copy; 2026 Code for Toyama. All rights reserved. | <a href="#" data-cookie-settings>Cookie設定</a></p>
+      <div class="footer-links">
+        <a href="#prefectural">県・市町村 公式データ</a>
+        <a href="#codetoyama">活用サイト・アプリ</a>
+        <a href="#about">このサイトについて</a>
+        <a href="#" data-cookie-settings>Cookie設定</a>
+      </div>
+      <p>&copy; 2026 Code for Toyama. All rights reserved.</p>
+      <p class="footer-meta">Code for Toyama · 富山県オープンデータ活用サイト</p>
     </footer>
   </div>
 </Base>
@@ -158,6 +166,96 @@ const apps = appsData as OpenDataApp[];
 
   const apps = appsData as OpenDataApp[];
   init(apps);
+
+  // Fade In Animation
+  const fadeElements = document.querySelectorAll('.fade-in');
+  const fadeObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          fadeObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+  );
+  fadeElements.forEach((el) => fadeObserver.observe(el));
+
+  // Mobile Menu Toggle
+  const menuToggle = document.querySelector('.menu-toggle');
+  const sectionNav = document.querySelector('.section-nav');
+
+  if (menuToggle && sectionNav) {
+    menuToggle.addEventListener('click', () => {
+      const isOpen = sectionNav.classList.toggle('nav-open');
+      menuToggle.setAttribute('aria-expanded', String(isOpen));
+      menuToggle.textContent = isOpen ? '✕' : '☰';
+    });
+  }
+
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach((link) => {
+    link.addEventListener('click', (e) => {
+      const href = (link as HTMLAnchorElement).getAttribute('href');
+      if (href && href !== '#') {
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        if (sectionNav) sectionNav.classList.remove('nav-open');
+        if (menuToggle) {
+          menuToggle.setAttribute('aria-expanded', 'false');
+          menuToggle.textContent = '☰';
+        }
+      }
+    });
+  });
+
+  // To Top Button
+  const toTop = document.createElement('button');
+  toTop.className = 'to-top';
+  toTop.setAttribute('aria-label', 'ページ上部へ戻る');
+  toTop.innerHTML = '↑';
+  toTop.setAttribute('type', 'button');
+  document.body.appendChild(toTop);
+
+  toTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 400) {
+      toTop.classList.add('visible');
+    } else {
+      toTop.classList.remove('visible');
+    }
+  });
+
+  // Active nav link on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-link');
+
+  const navObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          navLinks.forEach((link) => {
+            (link as HTMLElement).style.color = '';
+          });
+          const activeLink = document.querySelector(
+            `.nav-link[href="#${entry.target.id}"]`
+          ) as HTMLElement | null;
+          if (activeLink) {
+            activeLink.style.color = 'var(--color-primary)';
+          }
+        }
+      });
+    },
+    { threshold: 0.3 }
+  );
+  sections.forEach((section) => navObserver.observe(section));
 </script>
 
 <style>
