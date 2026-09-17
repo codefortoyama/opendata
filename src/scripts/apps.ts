@@ -70,7 +70,7 @@ function renderPagination(): void {
 
   let html = '';
   if (currentPage > 1) {
-    html += `<button class="page-btn" data-page="${currentPage - 1}" aria-label="前のページ"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg> 前へ</button>`;
+    html += `<a class="page-btn" data-page="${currentPage - 1}" href="?page=${currentPage - 1}" aria-label="前のページ"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg> 前へ</a>`;
   }
 
   const maxVisiblePages = 5;
@@ -82,25 +82,25 @@ function renderPagination(): void {
   }
 
   if (startPage > 1) {
-    html += `<button class="page-btn" data-page="1">1</button>`;
+    html += `<a class="page-btn" data-page="1" href="?page=1">1</a>`;
     if (startPage > 2) {
       html += `<span class="page-ellipsis">…</span>`;
     }
   }
 
   for (let i = startPage; i <= endPage; i++) {
-    html += `<button class="page-btn${i === currentPage ? ' active' : ''}" data-page="${i}"${i === currentPage ? ' aria-current="page"' : ''}>${i}</button>`;
+    html += `<a class="page-btn${i === currentPage ? ' active' : ''}" data-page="${i}" href="?page=${i}"${i === currentPage ? ' aria-current="page"' : ''}>${i}</a>`;
   }
 
   if (endPage < totalPages) {
     if (endPage < totalPages - 1) {
       html += `<span class="page-ellipsis">…</span>`;
     }
-    html += `<button class="page-btn" data-page="${totalPages}">${totalPages}</button>`;
+    html += `<a class="page-btn" data-page="${totalPages}" href="?page=${totalPages}">${totalPages}</a>`;
   }
 
   if (currentPage < totalPages) {
-    html += `<button class="page-btn" data-page="${currentPage + 1}" aria-label="次のページ">次へ <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></button>`;
+    html += `<a class="page-btn" data-page="${currentPage + 1}" href="?page=${currentPage + 1}" aria-label="次のページ">次へ <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></a>`;
   }
 
   pagination.innerHTML = html;
