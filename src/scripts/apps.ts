@@ -70,7 +70,7 @@ function renderPagination(): void {
 
   let html = '';
   if (currentPage > 1) {
-    html += `<button class="page-btn" data-page="${currentPage - 1}" aria-label="前のページ">‹ 前へ</button>`;
+    html += `<button class="page-btn" data-page="${currentPage - 1}" aria-label="前のページ"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg> 前へ</button>`;
   }
 
   const maxVisiblePages = 5;
@@ -100,7 +100,7 @@ function renderPagination(): void {
   }
 
   if (currentPage < totalPages) {
-    html += `<button class="page-btn" data-page="${currentPage + 1}" aria-label="次のページ">次へ ›</button>`;
+    html += `<button class="page-btn" data-page="${currentPage + 1}" aria-label="次のページ">次へ <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></button>`;
   }
 
   pagination.innerHTML = html;

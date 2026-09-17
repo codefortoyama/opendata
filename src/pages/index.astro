@@ -317,10 +317,61 @@ const apps = appsData as OpenDataApp[];
     margin-top: 1rem;
     color: #666;
   }
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
 .page-btn {
-  font-size: 1.1rem;
-  padding: 0.6rem 1rem;
-  min-width: 3rem;
-  text-align: center;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.6rem 1.2rem;
+  min-width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  background: white;
+  color: var(--color-text);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.page-btn svg {
+  flex-shrink: 0;
+}
+
+.page-btn:hover:not(.active) {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(26, 122, 46, 0.15);
+  background: var(--color-bg);
+}
+
+.page-btn.active {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
+  color: white;
+  border-color: transparent;
+  box-shadow: 0 4px 16px rgba(26, 122, 46, 0.35);
+  transform: translateY(-2px);
+}
+
+.page-ellipsis {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6rem 0.2rem;
+  color: var(--color-text-light);
+  font-size: 1.2rem;
+  letter-spacing: 2px;
 }
 </style>
