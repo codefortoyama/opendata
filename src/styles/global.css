@@ -165,15 +165,6 @@ body {
   box-shadow: 0 12px 24px rgba(0,0,0,0.12);
 }
 
-.card:hover::before {
-  opacity: 1;
-}
-
-.card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-}
-
 .card h3 {
   margin-bottom: 0.5rem;
   font-size: 1rem;
@@ -516,19 +507,22 @@ body {
   }
 
   .section-nav {
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    white-space: nowrap;
+    display: none;
+    flex-direction: column;
+    gap: 0;
     padding: 0.5rem;
   }
 
   .section-nav.nav-open {
     display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
   }
 
   .nav-link {
-    padding: 0.6rem 0.8rem;
+    padding: 0.8rem 1rem;
     min-width: auto;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
   }
 
   .to-top {

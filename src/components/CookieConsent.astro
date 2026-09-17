@@ -68,7 +68,7 @@
 
 <script>
   (function() {
-    function getStorageItem(key) {
+    function getStorageItem(key: string) {
       try {
         return localStorage.getItem(key);
       } catch (e) {
@@ -76,7 +76,7 @@
       }
     }
 
-    function setStorageItem(key, value) {
+    function setStorageItem(key: string, value: string) {
       try {
         localStorage.setItem(key, value);
       } catch (e) {
@@ -84,7 +84,7 @@
       }
     }
 
-    function removeStorageItem(key) {
+    function removeStorageItem(key: string) {
       try {
         localStorage.removeItem(key);
       } catch (e) {
@@ -100,12 +100,13 @@
 
     var consent = getStorageItem('cookieConsent');
 
-    function updateConsent(granted) {
-      if (typeof gtag === 'function') {
+    function updateConsent(granted: boolean) {
+      const w = window as unknown as { gtag?: Function };
+      if (typeof w.gtag === 'function') {
         if (granted) {
-          gtag('consent', 'update', { 'ad_storage': 'granted', 'analytics_storage': 'granted' });
+          w.gtag('consent', 'update', { 'ad_storage': 'granted', 'analytics_storage': 'granted' });
         } else {
-          gtag('consent', 'update', { 'ad_storage': 'denied', 'analytics_storage': 'denied' });
+          w.gtag('consent', 'update', { 'ad_storage': 'denied', 'analytics_storage': 'denied' });
         }
       }
     }
