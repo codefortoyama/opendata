@@ -70,5 +70,14 @@
     "url": "https://gtfs.evolinq.link/",
     "copyright": "株式会社EvoLiNQ",
     "verifiedDate": "2026-09-13"
+  },
+  {
+    "id": 9,
+    "name": "富山市小中学校アナライザー",
+    "category": ["教育", "学校", "人口", "統計", "地図"],
+    "description": "富山市の小中学校区と人口250mメッシュデータを可視化・比較できるオープンデータ活用サイト",
+    "url": "https://codefortoyama.github.io/school/",
+    "copyright": "Code for Toyama",
+    "verifiedDate": "2026-09-22"
   }
 ]
