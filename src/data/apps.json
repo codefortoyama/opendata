@@ -79,5 +79,23 @@
     "url": "https://codefortoyama.github.io/school/",
     "copyright": "Code for Toyama",
     "verifiedDate": "2026-09-22"
+  },
+  {
+    "id": 10,
+    "name": "富山市人口ビューアー",
+    "category": ["人口", "統計", "国勢調査", "住民基本台帳", "データ"],
+    "description": "国勢調査と住民基本台帳の人口を年齢×地域で比較・可視化できるオープンデータ活用サイト",
+    "url": "https://codefortoyama.github.io/population/",
+    "copyright": "EvoLiNQ / Code for Toyama",
+    "verifiedDate": "2026-09-29"
+  },
+  {
+    "id": 11,
+    "name": "OpenPOI API",
+    "category": ["施設", "POI", "API", "食品", "地図"],
+    "description": "Overture Maps と食品営業許可・届出オープンデータを統合した日本全国約337万件のPOIを検索できるAPI",
+    "url": "https://docs.openpoiapi.com/",
+    "copyright": "OpenPOI API",
+    "verifiedDate": "2026-10-04"
   }
 ]

@@ -169,8 +169,8 @@ function filterApps(query: string): void {
 }
 
 function init(apps: OpenDataApp[]): void {
-  allApps = apps;
-  filteredApps = [...apps];
+  allApps = [...apps].sort((a, b) => b.verifiedDate.localeCompare(a.verifiedDate));
+  filteredApps = [...allApps];
   currentPage = Math.min(
     getPageFromUrl(),
     Math.max(1, Math.ceil(filteredApps.length / ITEMS_PER_PAGE))
