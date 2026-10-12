@@ -123,6 +123,21 @@ test('withdrawal disables analytics, removes its cookies and reloads to unload t
   } finally { dom.window.close(); }
 });
 
+test('duplicate initialization cannot load or configure analytics twice', () => {
+  for (const choice of [undefined, 'accepted']) {
+    const dom = browser(choice);
+    try {
+      initConsent('/opendata/');
+      initConsent('/opendata/');
+      if (!choice) document.getElementById('cookie-accept').click();
+      assert.equal(document.querySelectorAll('script[src]').length, 1);
+      const commands = window.dataLayer.map(args => Array.from(args));
+      assert.equal(commands.filter(args => args[0] === 'config').length, 1);
+      assert.equal(commands.filter(args => args[0] === 'consent' && args[1] === 'default').length, 1);
+    } finally { dom.window.close(); }
+  }
+});
+
 test('revocation in another tab stops analytics in this tab', () => {
   const dom = browser('accepted');
   try {

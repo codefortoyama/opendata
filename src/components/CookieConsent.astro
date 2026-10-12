@@ -2,10 +2,6 @@
 const base = import.meta.env.BASE_URL;
 const policyHref = `${base}cookie-policy/`;
 ---
-<script>
-  import { initConsent } from '../scripts/consent';
-  initConsent(import.meta.env.BASE_URL);
-</script>
 <div id="cookie-consent" class="cookie-consent" role="alertdialog" aria-labelledby="cookie-heading" aria-modal="true">
   <p id="cookie-heading">
     このウェブサイトはクッキーを使用しています。

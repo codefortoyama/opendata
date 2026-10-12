@@ -10,6 +10,8 @@ export function initConsent(base: string, reload = () => window.location.reload(
   const accept = document.getElementById('cookie-accept');
   const reject = document.getElementById('cookie-reject');
   if (!banner || !accept || !reject) return;
+  if (banner.dataset.consentInitialized === 'true') return;
+  banner.dataset.consentInitialized = 'true';
 
   const analyticsWindow = window as unknown as Record<string, any>;
   const queue = analyticsWindow.dataLayer = analyticsWindow.dataLayer || [];
