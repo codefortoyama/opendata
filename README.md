@@ -21,6 +21,38 @@ npm test
 npm audit --audit-level=moderate
 ```
 
+本番ビルド後には、CSPのハッシュと配信ヘッダーも検証します。
+
+```bash
+npm run build
+npm run test:build-security
+```
+
+Astro標準のCSPが各ページのスクリプト・CSSのハッシュを生成します。
+未許可のスクリプト、インラインイベント属性、外部フレーム、プラグイン、フォーム送信を制限します。
+解析への同意後に必要なGoogleのスクリプトと通信先だけを許可しています。
+全ページに`Referrer Policy: no-referrer`のHTML設定を追加しています。
+
+## CloudflareでHTTPヘッダーを配信する
+
+GitHub PagesではHTMLのCSPとReferrer Policyが有効です。
+生成される`_headers`はGitHub PagesではHTTPヘッダーとして解釈されません。
+Cloudflare Workersの静的アセット配信では、このファイルからCSP、`X-Frame-Options: DENY`、
+`nosniff`、HSTS、Referrer／Permissions Policy、CORPを設定します。
+CSPの`frame-ancestors 'none'`はHTTPヘッダーにだけ追加します。
+
+Cloudflare用ビルドはルートURLで配信し、GitHub Pages用の`dist`とは別の`dist-cloudflare`に保存します。
+
+```bash
+npm run build:cloudflare -- https://code-for-toyama-opendata.tominari.workers.dev
+```
+
+`CSP_BUILD_DIR=dist-cloudflare`を設定して`npm run test:build-security`を実行できます。
+ローカル配信は`npm run dev:cloudflare`、認証確認は`npx wrangler whoami`です。
+確認済みのビルドを公開するには、対象アカウントとURLを確認した上で`npm run deploy:cloudflare`を実行します。
+Cloudflare公開はCLIによる手動操作で、GitHubへのpushだけでは更新されません。
+認証トークンをソースや設定ファイルに記録しないでください。
+
 PRと毎週の定期実行で型検査・セキュリティ回帰テスト・依存監査・ビルドを行います。
 公開はmasterへのpush、またはmasterからの手動実行に限定しています。
 Dependabotがnpm依存とGitHub Actionsの更新PRを週次で作成します。

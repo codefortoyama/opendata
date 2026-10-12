@@ -1,6 +1,8 @@
 # Build artifacts
 dist/
 dist-ssr/
+dist-cloudflare/
+.wrangler/
 .astro/
 
 # Dependencies

@@ -12,7 +12,11 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "test": "node --experimental-strip-types --test tests/*.test.mjs"
+    "test": "node --experimental-strip-types --test tests/security.test.mjs",
+    "test:build-security": "node --test tests/csp-build.test.mjs",
+    "build:cloudflare": "node scripts/build-cloudflare.mjs",
+    "dev:cloudflare": "wrangler dev --local --ip 127.0.0.1 --port 8787",
+    "deploy:cloudflare": "wrangler deploy"
   },
   "dependencies": {
     "astro": "^7.3.8",
@@ -22,6 +26,7 @@
     "@astrojs/check": "^0.9.10",
     "@types/qrcode": "^1.5.5",
     "jsdom": "^29.1.1",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "wrangler": "^4.149.0"
   }
 }

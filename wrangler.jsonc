@@ -1,0 +1,11 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "code-for-toyama-opendata",
+  "account_id": "ea0d1e363303ea7901236d0d0e950678",
+  "compatibility_date": "2026-10-12",
+  "assets": {
+    "directory": "./dist-cloudflare",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "none"
+  }
+}
