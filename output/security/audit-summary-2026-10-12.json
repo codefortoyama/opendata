@@ -1,0 +1,119 @@
+{
+  "date": "2026-10-12",
+  "basis": "https://www.ipa.go.jp/security/security-alert/2026/alert20261009.html",
+  "scope": {
+    "reviewed": [
+      "Local working tree source",
+      "package-lock.json and live npm audit",
+      "GitHub Actions workflow",
+      "public/ and dist/ limited credential-pattern scan"
+    ],
+    "not_verified": [
+      "Production HTTP security headers and published contents",
+      "GitHub organization/repository members, MFA, branch/environment protection, PATs and OAuth/GitHub Apps",
+      "GitHub login/audit/deployment logs for past 1 and 3 months",
+      "GA4 users, access logs and data retention",
+      "Full Git history secret scanning"
+    ],
+    "code_modified": false
+  },
+  "architecture": {
+    "hosting": "GitHub Pages configured; actual production deployment not verified",
+    "output": "static",
+    "application_backend": "None found",
+    "database": "None found",
+    "user_login": "None found",
+    "external_services": [
+      "GitHub repository / Actions / Pages",
+      "npm registry and dependencies",
+      "Google Analytics 4 / gtag.js"
+    ],
+    "third_party_directory_links": "Outbound links; not evidence these destinations share hosting, accounts or stored data"
+  },
+  "dependency_audit": {
+    "versions": {
+      "astro": "4.16.19",
+      "vite": "5.4.21",
+      "esbuild": "0.21.5",
+      "rollup": "4.63.2"
+    },
+    "counts": {
+      "info": 0,
+      "low": 0,
+      "moderate": 8,
+      "high": 10,
+      "critical": 1,
+      "total": 19
+    },
+    "evidence": "npm-audit-2026-10-12.json",
+    "meaning": "Counts represent vulnerable dependency entries including inherited issues, not distinct exploitable issues in the published static site"
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "priority": "High remediation priority",
+      "area": "Patches",
+      "evidence": "package-lock.json; npm audit",
+      "detail": "Known vulnerable Astro/Vite/esbuild/Sharp dependency chain. Critical Astro AVIF advisory requires attacker-controlled AVIF processing; no such public processing endpoint or import observed. PNG hero served as static public file. Vite Windows file disclosure requires network-exposed development server and sensitive file in allowed directories; exposure not verified.",
+      "remediation": "Upgrade to supported patched Astro and transitive packages in a separate validated change, then audit/check/build. Do not apply npm audit fix --force without migration review.",
+      "sources": [
+        "https://github.com/withastro/astro/security/advisories/GHSA-26w7-cxv4-gfx2",
+        "https://github.com/vitejs/vite/security/advisories/GHSA-fx2h-pf6j-xcff"
+      ]
+    },
+    {
+      "id": "F2",
+      "priority": "Medium",
+      "area": "Least privilege / release control",
+      "evidence": ".github/workflows/deploy.yml:10,43",
+      "detail": "pages:write and id-token:write set at workflow scope, inherited by build. Deploy job has no event/ref condition excluding pull_request. GitHub repository/environment policy may block PR deployment, so actual bypass is not established.",
+      "remediation": "Keep workflow/build contents:read; grant Pages and OIDC permissions only to deploy. Deploy only trusted master branch pushes or manual dispatch on master. Verify branch and environment protection."
+    },
+    {
+      "id": "F3",
+      "priority": "Medium",
+      "area": "Data minimization / consent",
+      "evidence": "src/layouts/Base.astro:32,39; src/components/CookieConsent.astro:122,144; src/pages/cookie-policy.astro",
+      "detail": "gtag downloaded before choice. Consent flags passed to config rather than a consent default command before measurement; no valid default consent instruction exists. Saved accepted/rejected choices are not replayed on load. gtag wrapper pushes an Array instead of documented arguments shape; integration should be corrected together. Actual cookies/network measurement not browser-verified. Policy says analytics cookies stay disabled until consent, which current implementation does not ensure.",
+      "remediation": "Initialize valid default denied state before config/event; restore saved consent; use documented gtag wrapper; preferably load analytics only after explicit consent for data minimization. Grant only analytics consent unless advertising is intended. Provide revocation on all pages and review GA retention/access.",
+      "source": "https://developers.google.com/tag-platform/security/guides/consent"
+    },
+    {
+      "id": "F4",
+      "priority": "Low under current trusted-data model",
+      "area": "HTML/URL validation",
+      "evidence": "src/scripts/apps.ts:33,36,39; src/pages/index.astro:177",
+      "detail": "app.url inserted unescaped and without protocol allowlist into innerHTML; escapeHtml protects text but does not escape attribute quotes used in QR alt. JSON embedded through set:html is not protected from literal closing script sequences in future URL keys. Current 11 URL records are HTTPS and lack quotes or angle brackets; no public input or current malicious record observed.",
+      "remediation": "Create DOM with textContent and attribute setters; validate URLs as HTTPS; escape less-than signs in script-embedded JSON; validate directory schema at build."
+    },
+    {
+      "id": "F5",
+      "priority": "Low hardening",
+      "area": "Supply chain",
+      "evidence": ".github/workflows/deploy.yml:24,27,39,52",
+      "detail": "Actions referenced using mutable version tags; no Dependabot config or dependency audit job found in working tree. Hosted alert settings not verified.",
+      "remediation": "Pin Actions to verified full commit SHA and configure update automation and CI audit.",
+      "source": "https://docs.github.com/en/actions/reference/security/secure-use"
+    }
+  ],
+  "limited_checks": {
+    "credentialPatternMatches": 0,
+    "filesScanned": 17,
+    "credentialScanNote": "Private-key, AWS access key and selected provider-token patterns only; not a guarantee of no secrets; excludes Git history",
+    "publicSourceMaps": 0,
+    "currentDirectoryURLs": {
+      "count": 11,
+      "httpsOnly": true,
+      "quotesOrAngleBrackets": false
+    },
+    "search": "Local filtering; no explicit search submission to backend. Analytics URL collection/configuration not verified."
+  },
+  "ipa_followup": [
+    "Inventory responsible owners and access for GitHub/Actions/Pages/npm/GA4",
+    "Review login, membership, token/App and deployment changes over past 1 month then expand to 3 months, preserving available logs",
+    "Check unknown or reactivated accounts and unusual login IPs/times",
+    "Verify MFA, least privilege, branch/environment protection and log retention",
+    "Document minimal data inventory and GA4 retention, and who reviews logs",
+    "If suspicious logs/accounts are found, preserve evidence and initiate incident response; this review does not establish presence or absence of compromise"
+  ]
+}

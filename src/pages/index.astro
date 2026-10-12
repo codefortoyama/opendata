@@ -1,17 +1,31 @@
 ---
 import Base from '../layouts/Base.astro';
 import appsData from '../data/apps.json';
-import type { OpenDataApp } from '../types';
+import QRCode from 'qrcode';
+import { validateApps, scriptJson } from '../scripts/data';
 
-const apps = appsData as OpenDataApp[];
+const apps = validateApps(appsData);
+
+const qrByUrl: Record<string, string> = {};
+for (const app of apps) {
+  qrByUrl[app.url] = await QRCode.toDataURL(app.url, { width: 96, margin: 1 });
+}
 ---
 
 <Base title="Code for Toyama - Open Data">
   <div class="container">
-    <header class="site-header hero">
+    <header class="hero">
+      <img
+        class="hero-image"
+        src={`${import.meta.env.BASE_URL}images/toyama-opendata-eyecatch.png`}
+        alt="立山連峰と富山湾、街並みと路面電車にデータのつながりを重ねたイラスト"
+        width="1672"
+        height="941"
+        loading="eager"
+        fetchpriority="high"
+      />
       <div class="inner">
         <div class="logo">
-          <span class="logo-mark">📊</span>
           <h1>Code for Toyama</h1>
         </div>
         <p class="subtitle">オープンデータ活用サイト・アプリ リンク集</p>
@@ -26,7 +40,7 @@ const apps = appsData as OpenDataApp[];
     </nav>
 
     <main>
-      <!-- セクション1: 今まで通りの公式データ（静的表示） -->
+      <!-- セクション1: 公式データ（静的表示） -->
       <section id="prefectural" class="section fade-in fade-in-delay-1">
         <h2 class="section-title">
           <span class="badge">1</span>
@@ -34,62 +48,62 @@ const apps = appsData as OpenDataApp[];
         </h2>
         <p class="section-desc">富山県や市町村が公開しているオープンデータポータルサイト</p>
         <div class="link-grid">
-          <a href="https://ckan-front.tdcp.pref.toyama.jp/" class="card" target="_blank" rel="noopener">
+          <a href="https://ckan-front.tdcp.pref.toyama.jp/" class="card card--link" target="_blank" rel="noopener">
             <h3>富山県／富山データ連携基盤</h3>
             <p>令和6年度より運用開始された県内のオープンデータ一元提供プラットフォーム</p>
             <span class="arrow">→</span>
           </a>
-          <a href="https://opdt.city.toyama.lg.jp/" class="card" target="_blank" rel="noopener">
+          <a href="https://opdt.city.toyama.lg.jp/" class="card card--link" target="_blank" rel="noopener">
             <h3>富山市オープンデータサイト</h3>
             <p>富山市が運営するデータカタログサイト</p>
             <span class="arrow">→</span>
           </a>
-          <a href="https://www.city.takaoka.toyama.jp/soshiki/johoseisakuka/2/3/1/1/index.html" class="card" target="_blank" rel="noopener">
+          <a href="https://www.city.takaoka.toyama.jp/soshiki/johoseisakuka/2/3/1/1/index.html" class="card card--link" target="_blank" rel="noopener">
             <h3>高岡市 オープンデータ</h3>
             <p>高岡市の公共施設・人口・防災等のデータカタログ</p>
             <span class="arrow">→</span>
           </a>
-          <a href="https://www.city.uozu.toyama.jp/guide/svGuideDtl.aspx?servno=13031" class="card" target="_blank" rel="noopener">
+          <a href="https://www.city.uozu.toyama.jp/guide/svGuideDtl.aspx?servno=13031" class="card card--link" target="_blank" rel="noopener">
             <h3>魚津市 オープンデータ</h3>
             <p>魚津市が保有する統計資料や施設情報などのデータ</p>
             <span class="arrow">→</span>
           </a>
-          <a href="https://www.city.himi.toyama.jp/gyosei/soshiki/somu/5/10101.html" class="card" target="_blank" rel="noopener">
+          <a href="https://www.city.himi.toyama.jp/gyosei/soshiki/somu/5/10101.html" class="card card--link" target="_blank" rel="noopener">
             <h3>氷見市 統計・データ</h3>
             <p>氷見市の各種統計データおよび公開情報</p>
             <span class="arrow">→</span>
           </a>
-          <a href="https://www.city.namerikawa.toyama.jp/soshiki/dx/opendata/index.html" class="card" target="_blank" rel="noopener">
+          <a href="https://www.city.namerikawa.toyama.jp/soshiki/dx/opendata/index.html" class="card card--link" target="_blank" rel="noopener">
             <h3>滑川市 オープンデータ</h3>
             <p>滑川市の行政データ・統計情報のカタログ</p>
             <span class="arrow">→</span>
           </a>
-          <a href="https://www.city.kurobe.toyama.jp/category/page.aspx?servno=10951" class="card" target="_blank" rel="noopener">
+          <a href="https://www.city.kurobe.toyama.jp/category/page.aspx?servno=10951" class="card card--link" target="_blank" rel="noopener">
             <h3>黒部市 オープンデータ</h3>
             <p>黒部市が公開する二次利用可能な公的データ</p>
             <span class="arrow">→</span>
           </a>
-          <a href="https://www.city.tonami.lg.jp/info/4061p/#gsc.tab=0" class="card" target="_blank" rel="noopener">
+          <a href="https://www.city.tonami.lg.jp/info/4061p/#gsc.tab=0" class="card card--link" target="_blank" rel="noopener">
             <h3>砺波市 オープンデータ</h3>
             <p>砺波市が提供する公共施設情報などのデータ集</p>
             <span class="arrow">→</span>
           </a>
-          <a href="https://www.city.oyabe.toyama.jp/shiseijyouhou/1001969/1003260.html" class="card" target="_blank" rel="noopener">
+          <a href="https://www.city.oyabe.toyama.jp/shiseijyouhou/1001969/1003260.html" class="card card--link" target="_blank" rel="noopener">
             <h3>小矢部市 オープンデータ</h3>
             <p>小矢部市の統計・施設・防災などの公開データ</p>
             <span class="arrow">→</span>
           </a>
-          <a href="https://www.city.nanto.toyama.jp/1909.html" class="card" target="_blank" rel="noopener">
+          <a href="https://www.city.nanto.toyama.jp/1909.html" class="card card--link" target="_blank" rel="noopener">
             <h3>南砺市 オープンデータ</h3>
             <p>南砺市が提供する各種統計・行政データ</p>
             <span class="arrow">→</span>
           </a>
-          <a href="https://opendata.city.imizu.toyama.jp/" class="card" target="_blank" rel="noopener">
+          <a href="https://opendata.city.imizu.toyama.jp/" class="card card--link" target="_blank" rel="noopener">
             <h3>射水市 オープンデータ</h3>
             <p>射水市の避難所、人口統計等のデータ提供</p>
             <span class="arrow">→</span>
           </a>
-          <a href="https://ckan-front.tdcp.pref.toyama.jp/organization" class="card" target="_blank" rel="noopener">
+          <a href="https://ckan-front.tdcp.pref.toyama.jp/organization" class="card card--link" target="_blank" rel="noopener">
             <h3>その他 町・村データ</h3>
             <p>上市町・立山町・入善町・朝日町・舟橋村のデータ（連携基盤内）</p>
             <span class="arrow">→</span>
@@ -97,7 +111,7 @@ const apps = appsData as OpenDataApp[];
         </div>
       </section>
 
-      <!-- セクション2: データから生成する活用サイト・アプリ（動的表示） -->
+      <!-- セクション2: 活用サイト・アプリ（動的表示） -->
       <section id="codetoyama" class="section fade-in fade-in-delay-2">
         <h2 class="section-title">
           <span class="badge">2</span>
@@ -124,8 +138,9 @@ const apps = appsData as OpenDataApp[];
         <nav class="pagination" id="pagination" aria-label="ページネーション">
           <!-- JSでレンダリング -->
         </nav>
-</section>
-       <section id="about" class="section fade-in fade-in-delay-3">
+      </section>
+
+      <section id="about" class="section fade-in fade-in-delay-3">
         <h2 class="section-title">
           <span class="badge">3</span>
           このサイトについて
@@ -138,7 +153,7 @@ const apps = appsData as OpenDataApp[];
             <a href="https://github.com/codefortoyama" class="btn" target="_blank" rel="noopener">
               GitHub
             </a>
-            <a href="https://www.codefortoyama.org" class="btn btn-primary" target="_blank" rel="noopener">
+            <a href="https://codefortoyama.github.io/" class="btn btn-primary" target="_blank" rel="noopener">
               公式サイト
             </a>
           </div>
@@ -159,13 +174,18 @@ const apps = appsData as OpenDataApp[];
   </div>
 </Base>
 
+<script is:inline type="application/json" id="apps-qr" set:html={scriptJson(qrByUrl)}></script>
+
 <script>
   import { init } from '../scripts/apps';
   import appsData from '../data/apps.json';
   import type { OpenDataApp } from '../types';
 
   const apps = appsData as OpenDataApp[];
-  init(apps);
+
+  const qrEl = document.getElementById('apps-qr');
+  const qrByUrl: Record<string, string> = qrEl?.textContent ? JSON.parse(qrEl.textContent) : {};
+  init(apps, qrByUrl);
 
   // Fade In Animation
   const fadeElements = document.querySelectorAll('.fade-in');
@@ -217,7 +237,7 @@ const apps = appsData as OpenDataApp[];
   const toTop = document.createElement('button');
   toTop.className = 'to-top';
   toTop.setAttribute('aria-label', 'ページ上部へ戻る');
-  toTop.innerHTML = '↑';
+  toTop.textContent = '↑';
   toTop.setAttribute('type', 'button');
   document.body.appendChild(toTop);
 
@@ -241,15 +261,9 @@ const apps = appsData as OpenDataApp[];
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          navLinks.forEach((link) => {
-            (link as HTMLElement).style.color = '';
-          });
-          const activeLink = document.querySelector(
-            `.nav-link[href="#${entry.target.id}"]`
-          ) as HTMLElement | null;
-          if (activeLink) {
-            activeLink.style.color = 'var(--color-primary)';
-          }
+          navLinks.forEach((link) => link.classList.remove('active'));
+          const activeLink = document.querySelector(`.nav-link[href="#${entry.target.id}"]`);
+          activeLink?.classList.add('active');
         }
       });
     },
@@ -257,122 +271,3 @@ const apps = appsData as OpenDataApp[];
   );
   sections.forEach((section) => navObserver.observe(section));
 </script>
-
-<style>
-  .search-box {
-    margin-bottom: 2rem;
-    padding: 1.5rem;
-    background: #fff;
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
-  }
-  .search-input {
-    width: 100%;
-    padding: 0.8rem;
-    border: 2px solid #eee;
-    border-radius: var(--border-radius);
-  }
-  .search-meta {
-    margin-top: 0.5rem;
-    font-size: 0.85rem;
-    color: var(--color-text-light);
-  }
-  :global(.tags) {
-    display: flex;
-    gap: 0.4rem;
-    margin: 0.5rem 0;
-  }
-  :global(.tag) {
-    font-size: 0.7rem;
-    padding: 0.1rem 0.4rem;
-    background: #f0fdf4;
-    color: #166534;
-    border-radius: 4px;
-  }
-  :global(.card) {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    gap: 1rem;
-  }
-  :global(.card-content) {
-    flex: 1;
-    min-width: 200px;
-  }
-  :global(.card-qr) {
-    flex-shrink: 0;
-    padding: 0.5rem;
-    background: #fff;
-    border: 1px solid #eee;
-    border-radius: 4px;
-  }
-  :global(.card-qr img) {
-    display: block;
-  }
-  :global(.card-meta) {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.75rem;
-    margin-top: 1rem;
-    color: #666;
-  }
-.pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.5rem;
-  margin-top: 2rem;
-  flex-wrap: wrap;
-}
-
-.page-btn {
-  font-size: 0.9rem;
-  font-weight: 600;
-  padding: 0.6rem 1.2rem;
-  min-width: 44px;
-  height: 44px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.4rem;
-  border: 2px solid #e0e0e0;
-  border-radius: 12px;
-  background: white;
-  color: var(--color-text);
-  cursor: pointer;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-}
-
-.page-btn svg {
-  flex-shrink: 0;
-}
-
-.page-btn:hover:not(.active) {
-  border-color: var(--color-primary);
-  color: var(--color-primary);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(26, 122, 46, 0.15);
-  background: var(--color-bg);
-}
-
-.page-btn.active {
-  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
-  color: white;
-  border-color: transparent;
-  box-shadow: 0 4px 16px rgba(26, 122, 46, 0.35);
-  transform: translateY(-2px);
-}
-
-.page-ellipsis {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.6rem 0.2rem;
-  color: var(--color-text-light);
-  font-size: 1.2rem;
-  letter-spacing: 2px;
-}
-</style>

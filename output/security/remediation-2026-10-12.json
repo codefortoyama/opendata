@@ -1,0 +1,32 @@
+{
+  "date": "2026-10-12",
+  "scope": "Local source and CI configuration; no remote deployment or account-setting changes",
+  "changes": [
+    "Astro updated from 4.16.19 to 7.3.8 and transitive vulnerabilities patched; Vite 8.3.4; vulnerable esbuild dependency removed",
+    "Node minimum 22.19.0 declared; CI uses Node 22; local portable Node 22.23.3 archive checksum verified",
+    "Deploy permissions scoped to deploy job; PR and scheduled builds cannot deploy; master push/manual dispatch only",
+    "Actions pinned to verified official repository SHAs; checkout credentials not persisted",
+    "Weekly dependency and Actions update configuration; scheduled dependency audit, type check, tests and build",
+    "Google tag loaded only after analytics consent, stored decisions restored, advertising denied, withdrawal disables and unloads tag and removes GA cookies",
+    "Cookie settings available on every page and policy aligned with implementation",
+    "Directory schema and HTTPS URL validation; cards constructed using DOM text and attributes; PNG-only QR URLs; script-safe JSON serialization",
+    "Development server binds loopback and was restarted with updated Astro and portable Node"
+  ],
+  "validation": {
+    "npmAudit": { "critical": 0, "high": 0, "moderate": 0, "low": 0, "total": 0 },
+    "auditEvidence": "npm-audit-after-fixes-2026-10-12.json",
+    "regressionTests": { "passed": 8, "failed": 0 },
+    "typeCheck": { "errors": 0, "warnings": 0, "hints": 0 },
+    "productionBuild": "passed with GITHUB_ACTIONS=true and /opendata base path",
+    "artifactChecks": "hero PNG, production path, Google tag absent from initial markup, policy navigation and withdrawal link verified",
+    "diffWhitespaceCheck": "passed"
+  },
+  "remainingServiceAdministration": [
+    "Verify GitHub and GA4 users, MFA, tokens and integrations",
+    "Set or verify master branch and github-pages environment protection",
+    "Review login/account-change/deployment logs over 1 then 3 months and assign owner/retention",
+    "Review GA4 data retention and enhanced measurement settings",
+    "Publish the reviewed source changes to activate remote workflow configuration"
+  ],
+  "limitations": "DOM behavior verified using jsdom; no real-browser packet capture, production-header assessment or historical compromise investigation"
+}

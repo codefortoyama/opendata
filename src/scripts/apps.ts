@@ -1,12 +1,5 @@
-interface OpenDataApp {
-  id: number;
-  name: string;
-  category: string[];
-  description: string;
-  url: string;
-  copyright: string;
-  verifiedDate: string;
-}
+import type { OpenDataApp } from '../types';
+import { httpsUrl, validateApps } from './data.ts';
 
 const ITEMS_PER_PAGE = 6;
 
@@ -14,11 +7,13 @@ let currentPage = 1;
 let filteredApps: OpenDataApp[] = [];
 let searchQuery = '';
 let allApps: OpenDataApp[] = [];
+let qrByUrl: Record<string, string> = {};
 
-function escapeHtml(text: string): string {
-  const div = document.createElement('div');
-  div.textContent = text;
-  return div.innerHTML;
+function element<K extends keyof HTMLElementTagNameMap>(tag: K, className: string, text?: string) {
+  const node = document.createElement(tag);
+  node.className = className;
+  if (text !== undefined) node.textContent = text;
+  return node;
 }
 
 function getElements() {
@@ -37,25 +32,33 @@ function renderApps(): void {
   const end = start + ITEMS_PER_PAGE;
   const pageApps = filteredApps.slice(start, end);
 
-  grid.innerHTML = pageApps.map((app) => `
-    <a href="${app.url}" class="card" target="_blank" rel="noopener">
-      <div class="card-content">
-        <h3>${escapeHtml(app.name)}</h3>
-        <div class="tags">
-          ${app.category.map((tag) => `<span class="tag">${escapeHtml(tag)}</span>`).join('')}
-        </div>
-        <p>${escapeHtml(app.description)}</p>
-      </div>
-      <div class="card-qr">
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=${encodeURIComponent(app.url)}" alt="QR Code" width="100" height="100" loading="lazy" />
-      </div>
-      <div class="card-meta">
-        <span class="copyright">© ${escapeHtml(app.copyright)}</span>
-        <span class="verified-date">確認日: ${escapeHtml(app.verifiedDate)}</span>
-        <span class="arrow">→</span>
-      </div>
-    </a>
-  `).join('');
+  grid.replaceChildren(...pageApps.map((app) => {
+    const card = element('a', 'card card--app');
+    card.href = httpsUrl(app.url);
+    card.target = '_blank';
+    card.rel = 'noopener noreferrer';
+    const content = element('div', 'card-content');
+    const tags = element('div', 'tags');
+    tags.append(...app.category.map(tag => element('span', 'tag', tag)));
+    content.append(element('h3', '', app.name), tags, element('p', '', app.description));
+    card.append(content);
+    const qr = qrByUrl[app.url];
+    if (qr && /^data:image\/png;base64,[A-Za-z0-9+/=]+$/.test(qr)) {
+      const qrBox = element('div', 'card-qr');
+      const image = element('img', '');
+      image.src = qr;
+      image.alt = `${app.name} のQRコード`;
+      image.width = image.height = 96;
+      image.loading = 'lazy';
+      qrBox.append(image);
+      card.append(qrBox);
+    }
+    const meta = element('div', 'card-meta');
+    meta.append(element('span', 'copyright', `© ${app.copyright}`),
+      element('span', 'verified-date', `確認日: ${app.verifiedDate}`), element('span', 'arrow', '→'));
+    card.append(meta);
+    return card;
+  }));
 }
 
 function renderPagination(): void {
@@ -168,8 +171,9 @@ function filterApps(query: string): void {
   updateResultsCount();
 }
 
-function init(apps: OpenDataApp[]): void {
-  allApps = [...apps].sort((a, b) => b.verifiedDate.localeCompare(a.verifiedDate));
+function init(apps: OpenDataApp[], qrMap: Record<string, string> = {}): void {
+  qrByUrl = qrMap;
+  allApps = [...validateApps(apps)].sort((a, b) => b.verifiedDate.localeCompare(a.verifiedDate));
   filteredApps = [...allApps];
   currentPage = Math.min(
     getPageFromUrl(),
@@ -216,4 +220,5 @@ function init(apps: OpenDataApp[]): void {
   updateResultsCount();
 }
 
-export { init, OpenDataApp, ITEMS_PER_PAGE };
+export { init, ITEMS_PER_PAGE };
+export type { OpenDataApp };

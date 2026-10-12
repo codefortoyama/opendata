@@ -1,0 +1,12 @@
+Generation mode: built-in image_gen
+Asset: public/images/toyama-opendata-eyecatch.png
+
+Use case: stylized-concept
+Asset type: landscape website eyecatch / hero illustration for Code for Toyama, a Japanese directory of Toyama prefecture open data portals and civic apps. Create a polished wide 16:9 raster artwork, ideally 1536x864.
+Primary request: communicate the beauty of Toyama and the accessible connections of open public data, matching a modern civic website with teal #0d7a72 and sky blue #2b8bd6.
+Scene/backdrop: a cohesive stylized panoramic Toyama landscape. Snow-capped, jagged multi-peak Tateyama mountain range across the middle distance, luminous blue Toyama Bay with gently curved shoreline, a compact Toyama city with a small tram, rivers and green agricultural fields in the foreground. Mountains are a Japanese alpine range, not Mount Fuji. This is an evocative illustration, not an accurate geographic map.
+Style/medium: sophisticated editorial illustration, elegant layered cut-paper forms with subtle tactile paper grain and soft dimensional shadows, crisp clean geometry, restrained details, welcoming civic design.
+Composition/framing: wide horizontal composition. Landscape occupies the lower two-thirds. Upper central third is calm pale aqua sky with generous uncluttered space suitable for an HTML heading. Main visual identity and connected data elements remain within central 80% to allow cropping. A few delicate pale teal connection arcs and small luminous network nodes link the landscape; integrate three subtle floating glass-like tiles showing only abstract bar-chart shapes, map-pin shape and tiny grid/table shapes into the foreground. These are illustration motifs, not a UI screenshot. Balanced, spacious, strongly legible as a thumbnail.
+Lighting/mood: fresh clear morning, optimistic, calm, credible, public-minded.
+Color palette: deep teal, turquoise, sky blue, glacier white, pale mint, restrained warm sunlight accents.
+Constraints: no words, no letters, no numerals, no title, no branding, no watermark. Opaque background. Avoid clutter, stock-photo collage, heavy neon, dark cyberpunk, excessive icons, photorealism and Fuji-like single cone mountain.
