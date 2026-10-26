@@ -19,7 +19,7 @@
     "deploy:cloudflare": "wrangler deploy"
   },
   "dependencies": {
-    "astro": "^7.3.8",
+    "astro": "^7.4.2",
     "qrcode": "^1.5.4"
   },
   "devDependencies": {
